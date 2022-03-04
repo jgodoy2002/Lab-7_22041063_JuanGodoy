@@ -1,6 +1,8 @@
 package Laboratorio7;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -10,8 +12,8 @@ public class Programa extends javax.swing.JFrame {
 
     //Variables creados por mi
     ArrayList<Equipo> equipo = new ArrayList();
-    File file = new File("Equipos.txt");
-    
+    File file = new File("equipo.txt");
+
     public Programa() {
         initComponents();
         for (Equipo object : equipo) {
@@ -20,20 +22,18 @@ public class Programa extends javax.swing.JFrame {
     }
 
     //Funciones creadas por mi
-    
-    public boolean esrepetido(String nombre){ //Es repetido?
+    public boolean esrepetido(String nombre) { //Es repetido?
         for (Equipo equipo1 : equipo) {
             //chequea en un foreach si el nombre existe para saber si no existe 
             //ese nombre. Retorna false si no existe para validar en un if para 
             //modificacion y creacion
-            if(!equipo1.getNombre().equalsIgnoreCase(nombre)){
+            if (!equipo1.getNombre().equalsIgnoreCase(nombre)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
+
     public void leerArchivo() throws IOException {
         Scanner s = new Scanner(file);
         ArrayList<String> list = new ArrayList<String>();
@@ -45,9 +45,6 @@ public class Programa extends javax.swing.JFrame {
 
     //Abajo son funciones no creadas por mi pero si hay algunas que son para el 
     //JFRAME 
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,7 +60,7 @@ public class Programa extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         js_gc = new javax.swing.JSpinner();
         js_gf = new javax.swing.JSpinner();
-        jButton2 = new javax.swing.JButton();
+        jb_crear = new javax.swing.JButton();
         jtf_nombre = new javax.swing.JTextField();
         js_pg = new javax.swing.JSpinner();
         js_pe = new javax.swing.JSpinner();
@@ -75,7 +72,7 @@ public class Programa extends javax.swing.JFrame {
         jtf_nombreModificar = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtf_nombreModificado = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jb_modificar = new javax.swing.JButton();
         jf_eliminar = new javax.swing.JFrame();
         jf_cargar = new javax.swing.JFrame();
         jf_simulador = new javax.swing.JFrame();
@@ -104,10 +101,15 @@ public class Programa extends javax.swing.JFrame {
 
         jLabel8.setText("Goles en Contra");
 
-        jButton2.setText("CREARLO! >:)");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jb_crear.setText("CREARLO! >:)");
+        jb_crear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                jb_crearMouseClicked(evt);
+            }
+        });
+        jb_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_crearActionPerformed(evt);
             }
         });
 
@@ -151,7 +153,7 @@ public class Programa extends javax.swing.JFrame {
                                     .addComponent(js_pp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jb_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jLabel9)))
@@ -188,7 +190,7 @@ public class Programa extends javax.swing.JFrame {
                     .addComponent(js_gc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jb_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -213,10 +215,15 @@ public class Programa extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Modificar nombre");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jb_modificar.setText("Modificar");
+        jb_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                jb_modificarMouseClicked(evt);
+            }
+        });
+        jb_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_modificarActionPerformed(evt);
             }
         });
 
@@ -226,7 +233,7 @@ public class Programa extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jb_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -253,7 +260,7 @@ public class Programa extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jtf_nombreModificado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jb_modificar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -361,6 +368,11 @@ public class Programa extends javax.swing.JFrame {
         menuLogin.add(jMenuItem2);
 
         jMenuItem3.setText("Cargar Archivo");
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem3MouseClicked(evt);
+            }
+        });
         menuLogin.add(jMenuItem3);
 
         menuListaPartidos.add(menuLogin);
@@ -442,32 +454,62 @@ public class Programa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuLoginActionPerformed
 
-
-
-
 //Buton para crear
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if(esrepetido(jtf_nombre.toString())){
-            String nombre = jtf_nombre.toString();
-            int partidog = js_pg.getComponentCount();
-            int partidoe = js_pe.getComponentCount();
-            int partidop = js_pp.getComponentCount();
-            int golesF = js_gf.getComponentCount();
-            int golesC = js_gc.getComponentCount();
-            equipo.add(new Equipo(nombre,partidog,partidoe,partidop,golesF,golesC));
+    private void jb_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearMouseClicked
+
+        jf_crear.show(false);
+        String nombre = jtf_nombre.toString();
+        int partidog = (int) js_pg.getValue();
+        int partidoe = (int) js_pe.getValue();
+        int partidop = (int) js_pp.getValue();
+        int golesF = (int) js_gf.getValue();
+        int golesC = (int) js_gc.getValue();
+        boolean flag = false;
+        if (esrepetido(jtf_nombre.toString())) {
+            Equipo e = new Equipo(nombre, partidog, partidop, partidop, golesF, golesC);
             
-        } else{
+            flag = true;
+        } else {
             JOptionPane.showMessageDialog(null, "Nombre ya existe o alguna error se formo");
         }
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jb_crearMouseClicked
 
     private void jtf_nombreModificadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nombreModificadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_nombreModificadoActionPerformed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    //Buton para modificar
+    private void jb_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarMouseClicked
+        if (!esrepetido(jtf_nombreModificar.toString())) {
+
+        }
+    }//GEN-LAST:event_jb_modificarMouseClicked
+    /*
+    Ignorar
+    private void jb_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_jb_modificarActionPerformed
+
+    private void jb_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_crearActionPerformed
+*/
+
+    //Cargar archcivo
+    private void jMenuItem3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MouseClicked
+        String linea = "";
+
+        BufferedReader br = new BufferedReader(new FileReader("./archivo.txt"));
+
+        while ((linea = br.readLine()) != null) {
+
+            String atributos = linea.split(",");
+
+            //ASIGNAR ATRIBUTOS A UN EQUIPO
+            listaEquipos.add(equipo);
+
+        }
+    }//GEN-LAST:event_jMenuItem3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -506,8 +548,6 @@ public class Programa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -524,6 +564,8 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jb_crear;
+    private javax.swing.JButton jb_modificar;
     private javax.swing.JFrame jf_cargar;
     private javax.swing.JFrame jf_crear;
     private javax.swing.JFrame jf_eliminar;
